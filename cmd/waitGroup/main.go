@@ -3,21 +3,25 @@ package main
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
 func worker(id int, wg *sync.WaitGroup) {
-	defer wg.Done() // ゴルーチンが終わったらカウントを減らす
-	fmt.Printf("Worker %d starting\n", id)
+	defer wg.Done()
+	fmt.Printf("Worker %d started\n", id)
+	time.Sleep(2 * time.Second) // 2秒待つ
+	fmt.Printf("Worker %d finished\n", id)
 }
 
 func main() {
 	var wg sync.WaitGroup
+	numWorkers := 10
 
-	for i := 1; i <= 3; i++ {
-		wg.Add(1) // ゴルーチンのカウントを追加
+	for i := 1; i <= numWorkers; i++ {
+		wg.Add(1)
 		go worker(i, &wg)
 	}
 
-	wg.Wait() // すべてのゴルーチンが終了するのを待つ
-	fmt.Println("All workers finished.")
+	wg.Wait()
+	fmt.Println("All workers completed.")
 }
