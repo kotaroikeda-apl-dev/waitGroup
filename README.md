@@ -11,7 +11,11 @@
 ### **実行方法**
 
 ```sh
-go run main.go  # goroutine を使った並列処理の実行
+go run cmd/goroutine/main.go  # goroutine を使った並列処理の実行
+go run cmd/waitGroup/main.go  # sync.WaitGroupの活用
+go run cmd/limit/main.go  # ループ数を変数で管理
+go run cmd/error/main.go  # エラー処理
+go run cmd/context/main.go  # タイムアウト制御
 ```
 
 ## **学習ポイント**
